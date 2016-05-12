@@ -1,0 +1,2 @@
+Das Verzeichnis /out muss existieren, damit der Testtreiber blackbox.LocationReaderBlackBox1Test
+in die Datei /out/LocationReaderBlackBox1Test.dat schreiben kann, die aber selbst nicht versioniert werden soll.
