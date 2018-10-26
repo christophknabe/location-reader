@@ -23,7 +23,7 @@ public class LocationReaderBlackBox1Test extends Assert {
         final String name = getClass().getSimpleName();
         final String filePath = "out/" + name + ".dat";  //Depends on existence of subdirectory "out"!
         final PrintWriter writer = new PrintWriter(filePath);
-        final String absFilePath = new File(filePath).getAbsolutePath();
+        final String absFilePath = new File(filePath).getPath();
         final int lineCount = 5;
         //Write line number into its line:
         for(int lineNumber=1; lineNumber<=lineCount; lineNumber++){

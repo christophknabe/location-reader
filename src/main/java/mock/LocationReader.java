@@ -7,7 +7,7 @@ import java.io.Reader;
 import java.io.LineNumberReader;
 import java.io.IOException;
 
-/**Reader knowing its actual location (SOURCE and line number).
+/**Reader component knowing its current location (source name and line number).
 *  Exports 2 interfaces: Reader for reading from it, Location for diagnostic purposes.
 *  !!Prepared for mock testing by dependency injection:
 *  Imports 2 interfaces:  Reader, String sourceName.
@@ -19,9 +19,9 @@ public class LocationReader extends Reader implements Location {
 
 	/**Composes a LocationReader using a Reader as import interface,
 	* and a name identifying it as a data source.	*/
-	public LocationReader(final Reader io_reader, final String i_sourceName) {
-		_sourceName = i_sourceName;
-		_lineNumberReader = new LineNumberReader(io_reader);
+	public LocationReader(final Reader reader, final String sourceName) {
+		_sourceName = sourceName;
+		_lineNumberReader = new LineNumberReader(reader);
 	}
 
 	//Implements for Reader

@@ -13,26 +13,22 @@ import java.io.IOException;
 
 /**Main class reporting all non-ASCII characters in the file given as command line argument.
 *  Demonstrates the usage of the composed LocationReader.
-*  When reading characters from the LocationReader in a loop,
-*  the LocationReader can easily be used to report the exact location
-*  of the illegal character.
+*  When reading characters from the Reader interface in a loop,
+*  the Location interface can easily be used to report the exact location
+*  of each illegal character.
 */
 public class LocationReaderDemo1 {
 
-    public static void main(final String[] i_args) throws IOException {
-        final String filePath = i_args.length == 0 ? "src/main/java/blackbox/LocationReaderDemo1.java" : i_args[0];
-        _reportNonAsciiCharacter(filePath);
+    public static void main(final String[] args) throws IOException {
+        final String fileName = args.length == 0 ? "src/main/java/blackbox/LocationReaderDemo1.java" : args[0];
+        new LocationReaderDemo1().reportNonAsciiCharacters(fileName);
     }
 
     /**Meldet Zeichen außerhalb des ASCII-Bereichs, z.B. äöüß.*/
-    private static void _reportNonAsciiCharacter(final String i_filePath) throws IOException {
-        final Reader reader;
-        final Location location;
-        {
-            final LocationReader locationReader = new LocationReader(i_filePath);
-            reader = locationReader;
-            location = locationReader;
-        }
+    void reportNonAsciiCharacters(final String fileName) throws IOException {
+        final LocationReader locationReader = new LocationReader(fileName);
+        final Reader reader = locationReader;
+        final Location location = locationReader;
         for(;;){
             final int code = reader.read();
             final char ch = (char)code;
@@ -42,8 +38,8 @@ public class LocationReaderDemo1 {
                     "Illegal character '" + ch + "' (code " + code + ") in file "
                     + location.getSourceName() + " at line " + location.getLineNumber()
                 );
-                break;
             }
         }
+        reader.close();
     }
 }

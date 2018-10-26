@@ -1,14 +1,13 @@
 package blackbox;
 
-import java.io.File;
 import java.io.Reader;
 import java.io.FileReader;
 import java.io.LineNumberReader;
 import java.io.IOException;
 
-/**Reader component knowing its actual location (source name and line number).
+/**Reader component knowing its current location (source name and line number).
 *  Exports 2 interfaces: Reader for reading from it, Location for diagnostic purposes.
-*  Imports 1 interface:  String for knowing the source, where to read from..
+*  Imports 1 interface:  String for identifying the file, where to read from.
 *  The composition is done in the constructor.
 */
 public class LocationReader extends Reader implements Location {
@@ -16,10 +15,10 @@ public class LocationReader extends Reader implements Location {
     private final String           _sourceName;
     private final LineNumberReader _lineNumberReader;
 
-    /**Composes a LocationReader using a File as import interface*/
-    public LocationReader(final String i_fileName) throws IOException {
-        _sourceName = new File(i_fileName).getAbsolutePath();
-        _lineNumberReader = new LineNumberReader(new FileReader(i_fileName));
+    /**Composes a LocationReader using a file name as import interface*/
+    public LocationReader(final String fileName) throws IOException {
+        _sourceName = fileName;
+        _lineNumberReader = new LineNumberReader(new FileReader(_sourceName));
     }
 
     //Implements for Reader
