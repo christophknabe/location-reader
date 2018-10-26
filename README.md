@@ -1,5 +1,5 @@
 # location-reader
-A LocationReader as a Java Reader, which reads from a source, giving the correct location
+A LocationReader as a Java Reader, which reads from a source, giving the current location
 
 Das ist Begleitmaterial für eine Unterrichtseinheit (Kapitel 1.9.1-1.9.2) aus dem Skript
 "Software-Projekt Realisierung": http://public.beuth-hochschule.de/~knabe/fach/swp-ii/ProjektRealisierung.pdf
