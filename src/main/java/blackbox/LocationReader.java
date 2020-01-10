@@ -16,8 +16,8 @@ public class LocationReader extends Reader implements Location {
     private final LineNumberReader _lineNumberReader;
 
     /**Composes a LocationReader using a file name as import interface*/
-    public LocationReader(final String fileName) throws IOException {
-        _sourceName = fileName;
+    public LocationReader(final String sourceName) throws IOException {
+        _sourceName = sourceName;
         _lineNumberReader = new LineNumberReader(new FileReader(_sourceName));
     }
 
