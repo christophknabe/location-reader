@@ -13,9 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-    <!-- For configuring Java version -->
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+    <java.version>11</java.version>
   </properties>
  
   <dependencies>
@@ -25,54 +23,54 @@
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>4.4.0</version>
+        <scope>test</scope>
+    </dependency>
   </dependencies>
  
   <build>
-    <pluginManagement>
-        <plugins>
-            <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-            <plugin>
-                <groupId>org.eclipse.m2e</groupId>
-                <artifactId>lifecycle-mapping</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <lifecycleMappingMetadata>
-                        <pluginExecutions>
-                            <pluginExecution>
-                                <pluginExecutionFilter>
-                                    <groupId>
-                                        org.apache.maven.plugins
-                                    </groupId>
-                                    <artifactId>
-                                        maven-javadoc-plugin
-                                    </artifactId>
-                                    <versionRange>
-                                        [2.9.1,)
-                                    </versionRange>
-                                    <goals>
-                                        <goal>javadoc</goal>
-                                    </goals>
-                                </pluginExecutionFilter>
-                                <action>
-                                    <ignore></ignore>
-                                </action>
-                            </pluginExecution>
-                        </pluginExecutions>
-                    </lifecycleMappingMetadata>
-                </configuration>
-            </plugin>
-        </plugins>
-    </pluginManagement>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.9.0</version>
+          <configuration>
+              <release>${java.version}</release>
+          </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.22.1</version>
         <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.source}</target>
+            <java>
+                <googleJavaFormat>
+                    <version>1.${java.version}.0</version>
+                </googleJavaFormat>
+                <!-- TODO: Add a <licenseHeader> configuration to make all license headers in source files consistent -->
+            </java>
         </configuration>
-      </plugin>  
+        <executions>
+            <!--
+            <execution>
+                <phase>test-compile</phase>
+                <goals>
+                    <goal>check</goal>
+                </goals>
+            </execution>
+            -->
+            <execution>
+                <phase>generate-test-sources</phase>
+                <goals>
+                    <!-- This modifies the source files so that they will adhere to the Google Java format conventions. -->
+                    <goal>apply</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
  
